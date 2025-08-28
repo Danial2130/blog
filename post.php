@@ -28,8 +28,12 @@ if ($post) {
         <?php endif; ?>
     <?php endif; ?>
 
-    <h1 class="mb-3"><?php echo htmlspecialchars($post['title']); ?></h1>
-    <div class="mb-4 text-muted">Dipost: <?php echo date("d M Y H:i", strtotime($post['created_at'])); ?></div>
+    <h1 class="mb-2"><?php echo htmlspecialchars($post['title']); ?></h1>
+    <div class="mb-4 text-muted" style="font-size:14px;">
+        <?php echo htmlspecialchars($post['category']); ?> | 
+        <?php echo date("d M Y H:i", strtotime($post['created_at'])); ?>
+    </div>
+
     <article class="mb-4" style="line-height:1.8">
       <?php echo nl2br(htmlspecialchars($post['content'])); ?>
     </article>
@@ -38,8 +42,6 @@ if ($post) {
       <div>👍 <?php echo (int)$likes; ?> Like</div>
       <div>💬 <?php echo mysqli_num_rows($comments); ?> Komentar</div>
     </div>
-
-    
 
   <?php else: ?>
     <div class="alert alert-danger">Posting tidak ditemukan.</div>

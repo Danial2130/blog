@@ -19,7 +19,14 @@ define('MAX_FILE_SIZE', 5 * 1024 * 1024); // 5 MB
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $content = mysqli_real_escape_string($conn, $_POST['content']);
+    $category = mysqli_real_escape_string($conn, $_POST['category']);
     $image = "";
+
+    // validasi kategori
+    $allowed_categories = ['Ide','Bertanya-tanya','Random'];
+    if (!in_array($category, $allowed_categories)) {
+        die("<p style='color:red;'>Kategori tidak valid!</p>");
+    }
 
     if (!empty($_FILES['image']['name'])) {
         $file = $_FILES['image'];
@@ -44,10 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $name = time() . "_" . preg_replace("/[^A-Za-z0-9_.-]/", "", $file['name']);
         $tmp  = $file['tmp_name'];
 
-        // folder uploads harus sudah ada
+        // folder uploads harus ada
         $target_dir = __DIR__ . '/uploads/';
         if (!is_dir($target_dir)) {
-            die("<p style='color:red;'>Folder uploads/ tidak ada. Silakan buat folder uploads/ dan beri permission writable!</p>");
+            mkdir($target_dir, 0777, true);
         }
         if (!is_writable($target_dir)) {
             die("<p style='color:red;'>Folder uploads/ tidak writable. Cek permission!</p>");
@@ -61,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // simpan ke database
-    $query = "INSERT INTO posts (title, content, image) VALUES ('$title','$content','$image')";
+    // simpan ke database (perbaikan urutan kolom)
+    $query = "INSERT INTO posts (title, category, content, image) VALUES ('$title','$category','$content','$image')";
     if (mysqli_query($conn, $query)) {
         header("Location: index.php");
         exit;
@@ -88,6 +95,14 @@ include 'includes/header.php';
         <div class="mb-3">
             <label class="form-label">Isi</label>
             <textarea name="content" rows="8" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Kategori</label>
+            <select name="category" class="form-select" required>
+                <option value="Ide">Ide</option>
+                <option value="Bertanya-tanya">Bertanya-tanya</option>
+                <option value="Random">Random</option>
+            </select>
         </div>
         <button class="btn btn-success">Simpan</button>
     </form>

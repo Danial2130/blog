@@ -56,7 +56,15 @@ $is_admin = (isset($_SESSION['username']) && $_SESSION['username'] === 'admin');
     <div id="nav" class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto">
         <li class="nav-item"><a class="nav-link" href="index.php">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Kategori</a></li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+         Kategori</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="index.php?category=Ide">Ide</a></li>
+        <li><a class="dropdown-item" href="index.php?category=Bertanya-tanya">Bertanya-tanya</a></li>
+        <li><a class="dropdown-item" href="index.php?category=Random">Random</a></li>
+      </ul>
+        </li>
         <li class="nav-item"><a class="nav-link" href="#">Favorit</a></li>
         <li class="nav-item"><a class="nav-link" href="about.php">Tentang</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">Kontak</a></li>
