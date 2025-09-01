@@ -1,6 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) { header("Location: login.php"); exit; }
+if (!isset($_SESSION['user_id'])) { 
+    header("Location: login.php"); 
+    exit; 
+}
 require 'includes/db.php';
 include 'includes/header.php';
 
@@ -15,27 +18,27 @@ if ($post) {
 }
 ?>
 
-<div class="container my-4" style="max-width: 900px;">
+<div class="container my-4" style="max-width: 1000px;">
   <?php if ($post): ?>
     <?php 
       $img_path = 'uploads/' . $post['image'];
       if (!empty($post['image']) && file_exists($img_path)): ?>
         <img src="<?php echo $img_path; ?>" class="img-fluid rounded mb-3" alt="gambar">
     <?php else: ?>
-        <img src="https://via.placeholder.com/900x400?text=No+Image" class="img-fluid rounded mb-3" alt="no-image">
+        <img src="https://via.placeholder.com/1000x400?text=No+Image" class="img-fluid rounded mb-3" alt="no-image">
         <?php if (!empty($post['image'])): ?>
-          <small class="text-danger">File <?php echo $post['image']; ?> tidak ditemukan di uploads/</small>
+          <small class="text-danger">File <?php echo htmlspecialchars($post['image']); ?> tidak ditemukan di uploads/</small>
         <?php endif; ?>
     <?php endif; ?>
 
     <h1 class="mb-2"><?php echo htmlspecialchars($post['title']); ?></h1>
     <div class="mb-4 text-muted" style="font-size:14px;">
-        <?php echo htmlspecialchars($post['category']); ?> | 
+        <span class="badge bg-primary"><?php echo htmlspecialchars($post['category']); ?></span> | 
         <?php echo date("d M Y H:i", strtotime($post['created_at'])); ?>
     </div>
 
-    <article class="mb-4" style="line-height:1.8">
-      <?php echo nl2br(htmlspecialchars($post['content'])); ?>
+    <article class="mb-4" style="line-height:1.8; font-size:1.1rem;">
+      <?php echo $post['content']; ?>
     </article>
 
     <div class="d-flex justify-content-between align-items-center border-top pt-3 mb-3">

@@ -65,7 +65,6 @@ $is_admin = (isset($_SESSION['username']) && $_SESSION['username'] === 'admin');
         <li><a class="dropdown-item" href="index.php?category=Random">Random</a></li>
       </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#">Favorit</a></li>
         <li class="nav-item"><a class="nav-link" href="about.php">Tentang</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.php">Kontak</a></li>
         <?php if ($is_admin): ?>
