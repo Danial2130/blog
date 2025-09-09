@@ -63,7 +63,7 @@ $is_admin = (isset($_SESSION['username']) && $_SESSION['username'] === 'admin');
       box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 1rem 0;
-      z-index: 2000; /* Ensure navbar is above other content */
+      z-index: 2000; /* Ensure navbar is above other content */   
     }
 
     .navbar-brand {

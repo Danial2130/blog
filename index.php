@@ -28,21 +28,21 @@ $res = mysqli_query($conn, $sql);
 }
 
 .post-card-enhanced {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   position: relative;
   margin-bottom: 2rem;
   z-index: 1;
 }
 
 .post-card-enhanced:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
 }
 
 .post-card-enhanced::before {
@@ -54,7 +54,7 @@ $res = mysqli_query($conn, $sql);
   height: 4px;
   background: linear-gradient(90deg, var(--pastel-pink), var(--pastel-blue), var(--pastel-green), var(--pastel-yellow));
   background-size: 300% 100%;
-  animation: gradientShift 3s ease infinite;
+  animation: gradientShift 4s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -65,18 +65,20 @@ $res = mysqli_query($conn, $sql);
 .post-image-container {
   position: relative;
   overflow: hidden;
-  flex: 0 0 280px;
+  flex: 0 0 300px;
+  height: 100%;
 }
 
 .post-image {
-  width: 280px;
-  height: 220px;
+  width: 300px;
+  height: 100%;
+  min-height: 250px;
   object-fit: cover;
-  transition: all 0.6s ease;
+  transition: transform 0.4s ease;
 }
 
 .post-card-enhanced:hover .post-image {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .post-image-overlay {
@@ -87,7 +89,7 @@ $res = mysqli_query($conn, $sql);
   bottom: 0;
   background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .post-card-enhanced:hover .post-image-overlay {
@@ -95,33 +97,37 @@ $res = mysqli_query($conn, $sql);
 }
 
 .post-content-enhanced {
-  padding: 1.8rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  min-height: 220px;
+  justify-content: space-between;
+  min-height: 250px;
   position: relative;
+  flex: 1;
 }
 
 .post-title {
   color: var(--text-primary);
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   text-decoration: none;
   transition: all 0.3s ease;
   line-height: 1.4;
+  display: block;
 }
 
 .post-title:hover {
   color: var(--accent-color);
-  text-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
   text-decoration: none;
 }
 
 .post-meta {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
@@ -129,70 +135,118 @@ $res = mysqli_query($conn, $sql);
 .category-badge {
   background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-pink));
   color: var(--text-primary);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
   font-weight: 600;
   font-size: 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .post-date {
   background: rgba(118, 75, 162, 0.1);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .post-excerpt {
   flex: 1;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 1.5rem;
   font-size: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.post-stats {
+.post-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin-top: auto;
 }
 
-.stat-item {
+.action-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-item {
   display: flex;
   align-items: center;
   color: var(--text-secondary);
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  background: rgba(102, 126, 234, 0.05);
+  border: 1px solid rgba(102, 126, 234, 0.1);
 }
 
-.stat-item:hover {
+.action-item:hover {
   color: var(--accent-color);
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  background: rgba(102, 126, 234, 0.1);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
 }
 
-.stat-icon {
+.action-icon {
   font-size: 1.2rem;
-  margin-right: 0.5rem;
+  margin-right: 0.6rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.read-more-link {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.read-more-link:hover {
+  color: white;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
 }
 
 .welcome-header {
   text-align: center;
   margin-bottom: 3rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(15px);
   border-radius: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   position: relative;
-  z-index: 1; /* Lower than navbar dropdown */
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .welcome-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -200,34 +254,54 @@ $res = mysqli_query($conn, $sql);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .welcome-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--text-secondary);
   font-weight: 400;
+  opacity: 0.9;
 }
 
 .no-posts {
   text-align: center;
-  padding: 3rem;
+  padding: 4rem 2rem;
   color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .no-posts-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
   color: var(--pastel-purple);
+  opacity: 0.7;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+.no-posts h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.no-posts p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
   .post-card-enhanced {
     flex-direction: column;
   }
   
   .post-image-container {
     flex: none;
+    width: 100%;
+    height: 250px;
   }
   
   .post-image {
@@ -236,15 +310,75 @@ $res = mysqli_query($conn, $sql);
   }
   
   .welcome-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .post-content-enhanced {
+    padding: 1.5rem;
+    min-height: auto;
+  }
+  
+  .post-title {
+    font-size: 1.3rem;
+  }
+  
+  .welcome-title {
     font-size: 2rem;
   }
   
   .welcome-subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .post-meta {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+  
+  .post-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .action-group {
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .read-more-link {
+    width: 100%;
+    justify-content: center;
   }
 }
 
-/* Floating elements */
+@media (max-width: 480px) {
+  .welcome-header {
+    padding: 2rem 1rem;
+  }
+  
+  .post-content-enhanced {
+    padding: 1rem;
+  }
+  
+  .post-title {
+    font-size: 1.2rem;
+  }
+  
+  .action-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .action-item {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Floating elements - kept minimal */
 .floating-shapes {
   position: fixed;
   top: 0;
@@ -252,20 +386,20 @@ $res = mysqli_query($conn, $sql);
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: -1; /* Behind everything */
+  z-index: -1;
   overflow: hidden;
 }
 
 .shape {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.1;
-  animation: float 6s ease-in-out infinite;
+  opacity: 0.08;
+  animation: float 8s ease-in-out infinite;
 }
 
 .shape1 {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background: var(--pastel-pink);
   top: 20%;
   left: 10%;
@@ -273,26 +407,49 @@ $res = mysqli_query($conn, $sql);
 }
 
 .shape2 {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   background: var(--pastel-blue);
   top: 60%;
   right: 15%;
-  animation-delay: 2s;
+  animation-delay: 3s;
 }
 
 .shape3 {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background: var(--pastel-green);
   bottom: 20%;
   left: 20%;
-  animation-delay: 4s;
+  animation-delay: 6s;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
+  33% { transform: translateY(-15px) rotate(120deg); }
+  66% { transform: translateY(-25px) rotate(240deg); }
+}
+
+/* Improved scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading states */
+.post-card-enhanced.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.post-card-enhanced.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 10;
 }
 </style>
 
@@ -317,12 +474,12 @@ $res = mysqli_query($conn, $sql);
           <?php 
           $img_path = 'uploads/' . $row['image'];
           if (!empty($row['image']) && file_exists($img_path)): ?>
-            <img src="<?php echo $img_path; ?>" 
-                 alt="gambar"
+            <img src="<?php echo htmlspecialchars($img_path); ?>" 
+                 alt="<?php echo htmlspecialchars($row['title']); ?>"
                  class="post-image">
           <?php else: ?>
-            <img src="https://via.placeholder.com/280x220/E5F4FF/667EEA?text=BlogD" 
-                 alt="no-image"
+            <img src="https://via.placeholder.com/300x250/E5F4FF/667EEA?text=BlogD" 
+                 alt="<?php echo htmlspecialchars($row['title']); ?>"
                  class="post-image">
           <?php endif; ?>
           <div class="post-image-overlay"></div>
@@ -330,40 +487,49 @@ $res = mysqli_query($conn, $sql);
 
         <!-- Konten -->
         <div class="post-content-enhanced">
-          <h5>
-            <a href="post.php?id=<?php echo $row['id']; ?>" class="post-title">
-              <?php echo htmlspecialchars($row['title']); ?>
-            </a>
-          </h5>
+          <div>
+            <h5>
+              <a href="post.php?id=<?php echo $row['id']; ?>" class="post-title">
+                <?php echo htmlspecialchars($row['title']); ?>
+              </a>
+            </h5>
 
-          <div class="post-meta">
-            <span class="category-badge">
-              <i class="fas fa-tag me-1"></i>
-              <?php echo htmlspecialchars($row['category']); ?>
-            </span>
-            <span class="post-date">
-              <i class="fas fa-calendar me-1"></i>
-              <?php echo date('d M Y', strtotime($row['created_at'])); ?>
-            </span>
+            <div class="post-meta">
+              <span class="category-badge">
+                <i class="fas fa-tag"></i>
+                <?php echo htmlspecialchars($row['category']); ?>
+              </span>
+              <span class="post-date">
+                <i class="fas fa-calendar-alt"></i>
+                <?php echo date('d M Y', strtotime($row['created_at'])); ?>
+              </span>
+            </div>
+
+            <p class="post-excerpt">
+              <?php echo htmlspecialchars(mb_substr(strip_tags($row['content']), 0, 200)) . "..."; ?>
+            </p>
           </div>
 
-          <p class="post-excerpt">
-            <?php echo htmlspecialchars(mb_substr(strip_tags($row['content']), 0, 180)) . "..."; ?>
-          </p>
-
-          <div class="post-stats">
-            <div class="stat-item">
-              <span class="stat-icon">👍</span>
-              <span><?php echo (int)$row['like_count']; ?> Like</span>
+          <div class="post-actions">
+            <div class="action-group">
+              <div class="action-item">
+                <span class="action-icon">❤️</span>
+                <span><?php echo (int)$row['like_count']; ?> Like</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">💬</span>
+                <span><?php echo (int)$row['comment_count']; ?> Komentar</span>
+              </div>
+              <div class="action-item">
+                <span class="action-icon">👁️</span>
+                <span>Lihat</span>
+              </div>
             </div>
-            <div class="stat-item">
-              <span class="stat-icon">💬</span>
-              <span><?php echo (int)$row['comment_count']; ?> Komentar</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-icon">👁️</span>
+            
+            <a href="post.php?id=<?php echo $row['id']; ?>" class="read-more-link">
               <span>Baca Selengkapnya</span>
-            </div>
+              <i class="fas fa-arrow-right"></i>
+            </a>
           </div>
         </div>
       </div>
