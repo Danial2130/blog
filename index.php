@@ -211,7 +211,7 @@ $res = mysqli_query($conn, $sql);
 
 .read-more-link {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
+  color: purple;
   padding: 0.7rem 1.5rem;
   border-radius: 25px;
   text-decoration: none;
