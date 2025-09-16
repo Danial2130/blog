@@ -63,8 +63,8 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
     /* Modern Slide Transition Overlay */
     .slide-overlay {
       position: fixed;
-      top: 0;
-      left: -100%;
+      top: 100vh;
+      left: 0;
       width: 100vw;
       height: 100vh;
       background: linear-gradient(135deg, #667EEA 0%, #764BA2 50%, #F093FB 100%);
@@ -73,10 +73,14 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       align-items: center;
       justify-content: center;
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+      visibility: hidden;
     }
 
     .slide-overlay.active {
-      left: 0;
+      top: 0;
+      opacity: 1;
+      visibility: visible;
     }
 
     .slide-overlay::before {
@@ -99,13 +103,13 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       text-align: center;
       color: white;
       z-index: 10001;
-      transform: translateX(-50px);
+      transform: translateY(50px);
       opacity: 0;
       transition: all 0.5s ease 0.3s;
     }
 
     .slide-overlay.active .slide-content {
-      transform: translateX(0);
+      transform: translateY(0);
       opacity: 1;
     }
 
@@ -170,7 +174,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
         opacity: 1;
       }
       100% {
-        transform: translateY(-10vh) translateX(100px) rotate(360deg);
+        transform: translateY(-10vh) translateX(50px) rotate(360deg);
         opacity: 0;
       }
     }
@@ -245,19 +249,25 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
 
     /* Special Back Button Styling */
     .back-btn {
-      background: linear-gradient(135deg, #68D391, #38B2AC) !important;
+      background: linear-gradient(135deg, #FF6B6B, #FF8E8E) !important;
       border: none;
       color: white !important;
-      font-weight: 600;
-      box-shadow: 0 4px 15px rgba(104, 211, 145, 0.3);
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
       position: relative;
       overflow: hidden;
+      padding: 0.8rem 1.5rem !important;
+      border-radius: 25px !important;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .back-btn:hover {
-      background: linear-gradient(135deg, #38B2AC, #68D391) !important;
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(104, 211, 145, 0.4);
+      background: linear-gradient(135deg, #FF8E8E, #FF6B6B) !important;
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
+      color: white !important;
     }
 
     .back-btn::before {
@@ -267,13 +277,18 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
       transform: translateY(-50%);
     }
 
     .back-btn:hover::before {
       left: 100%;
+    }
+
+    .back-btn i {
+      margin-right: 8px;
+      font-size: 1.2rem;
     }
 
     /* Enhanced About Link */
@@ -456,7 +471,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       <i class="fas fa-info-circle"></i>
     </div>
     <div class="slide-text">Membuka Halaman Tentang</div>
-    <div class="slide-subtext">Mohon tunggu sebentar...</div>
+    <div class="slide-subtext">Naik dari bawah...</div>
   </div>
 </div>
 
@@ -470,8 +485,13 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       <ul class="navbar-nav me-auto">
         <?php if ($is_about_page): ?>
           <li class="nav-item">
-            <a class="nav-link back-btn" href="../index.php">
-              <i class="fas fa-arrow-left me-1"></i>Kembali ke Blog
+            <a class="nav-link back-btn" href="../index.php" id="backToMain">
+              <i class="fas fa-arrow-left me-1"></i>Kembali ke Blog Utama
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">
+              <i class="fas fa-info-circle me-1"></i>About Home
             </a>
           </li>
         <?php else: ?>
