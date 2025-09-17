@@ -4,10 +4,8 @@
     <!-- Tombol Kembali ke Blog Utama -->
     <div class="row mb-4">
         <div class="col-12">
-            <a href="../index.php" class="btn-back-to-blog" id="backToBlogBtn">
-                <i class="fas fa-arrow-left"></i>
-                <span>Kembali ke Blog Utama</span>
-                <div class="btn-shine"></div>
+            <a href="../index.php" class="btn-back-simple" id="backToBlogBtn">
+                <i class="fas fa-arrow-left me-2"></i>Kembali ke Blog
             </a>
         </div>
     </div>
@@ -58,56 +56,31 @@
 </div>
 
 <style>
-/* Tombol Kembali ke Blog Utama */
-.btn-back-to-blog {
+/* Tombol Kembali Sederhana */
+.btn-back-simple {
     display: inline-flex;
     align-items: center;
-    padding: 15px 30px;
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 50%, #FF6B6B 100%);
+    padding: 10px 20px;
+    background: #667EEA;
     color: white;
     text-decoration: none;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
     margin-bottom: 20px;
-    border: none;
 }
 
-.btn-back-to-blog:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+.btn-back-simple:hover {
+    background: #5a6fd8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     color: white;
     text-decoration: none;
 }
 
-.btn-back-to-blog i {
-    font-size: 1.3rem;
-    margin-right: 12px;
-    transition: transform 0.3s ease;
-}
-
-.btn-back-to-blog:hover i {
-    transform: translateX(-5px);
-}
-
-.btn-shine {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: left 0.6s ease;
-}
-
-.btn-back-to-blog:hover .btn-shine {
-    left: 100%;
+.btn-back-simple i {
+    font-size: 0.9rem;
 }
 
 /* About Card Styling */
@@ -234,9 +207,9 @@
         margin: 0 15px;
     }
     
-    .btn-back-to-blog {
-        font-size: 1rem;
-        padding: 12px 25px;
+    .btn-back-simple {
+        font-size: 0.9rem;
+        padding: 8px 16px;
     }
     
     .content-section {
@@ -291,20 +264,14 @@ document.addEventListener('DOMContentLoaded', function() {
         backBtn.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Add click effect
-            this.style.transform = 'scale(0.95)';
+            // Simple fade out transition
+            document.body.style.opacity = '0.7';
+            document.body.style.transition = 'opacity 0.3s ease';
             
+            // Navigate after short delay
             setTimeout(() => {
-                // Create slide-out transition
-                document.body.style.transform = 'translateX(-100%)';
-                document.body.style.transition = 'transform 0.6s ease-in-out';
-                document.body.style.opacity = '0.8';
-                
-                // Navigate after animation
-                setTimeout(() => {
-                    window.location.href = this.href;
-                }, 600);
-            }, 150);
+                window.location.href = this.href;
+            }, 300);
         });
     }
 });

@@ -114,33 +114,14 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
     }
 
     .slide-icon {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      animation: bounceIcon 1s ease infinite;
-    }
-
-    @keyframes bounceIcon {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-20px);
-      }
-      60% {
-        transform: translateY(-10px);
-      }
+      font-size: 3rem;
+      margin-bottom: 15px;
     }
 
     .slide-text {
-      font-size: 1.8rem;
-      font-weight: 600;
+      font-size: 1.4rem;
+      font-weight: 500;
       margin-bottom: 10px;
-    }
-
-    .slide-subtext {
-      font-size: 1rem;
-      opacity: 0.8;
-      font-weight: 300;
     }
 
     /* Particle Effect */
@@ -468,10 +449,9 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
   <div class="particles" id="particles"></div>
   <div class="slide-content">
     <div class="slide-icon">
-      <i class="fas fa-info-circle"></i>
+      <i class="fas fa-spinner fa-spin"></i>
     </div>
-    <div class="slide-text">Membuka Halaman Tentang</div>
-    <div class="slide-subtext">Naik dari bawah...</div>
+    <div class="slide-text">Loading...</div>
   </div>
 </div>
 
@@ -607,4 +587,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<main>
+<main></main></main>
