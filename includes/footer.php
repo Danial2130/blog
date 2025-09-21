@@ -332,28 +332,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-<!-- Portal animation element -->
-<div id="portal-animation"></div>
-
-<!-- Script portal -->
-<script>
-  document.querySelectorAll(".portal-link").forEach(link => {
-    link.addEventListener("click", function(e) {
-      e.preventDefault();
-      const portal = document.getElementById("portal-animation");
-      portal.classList.add("active");
-
-      // Optional: fade out body
-      document.body.classList.add("portal-fade");
-
-      setTimeout(() => {
-        window.location.href = this.href;
-      }, 800); // delay harus lebih kecil dari CSS transition
-    });
-  });
-</script>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

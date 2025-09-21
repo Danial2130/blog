@@ -160,14 +160,15 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       }
     }
 
-    /* Navbar Styling */
+    /* Navbar Styling - Z-INDEX DIPERBAIKI */
     .navbar {
       background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%) !important;
       backdrop-filter: blur(10px);
       box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 1rem 0;
-      z-index: 2000;
+      z-index: 9999 !important; /* NAIKKAN Z-INDEX */
+      position: relative;
     }
 
     .navbar-brand {
@@ -293,57 +294,94 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       left: 100%;
     }
 
+    /* DROPDOWN MENU - Z-INDEX DIPERBAIKI */
     .dropdown-menu {
-      background: rgba(255, 255, 255, 0.98);
+      background: rgba(255, 255, 255, 0.98) !important;
       backdrop-filter: blur(15px);
-      border: 1px solid rgba(102, 126, 234, 0.2);
-      border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+      border: 1px solid rgba(102, 126, 234, 0.2) !important;
+      border-radius: 15px !important;
+      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15) !important;
       padding: 0.8rem;
       min-width: 200px;
-      z-index: 2000;
-      position: absolute;
+      z-index: 99999 !important; /* NAIKKAN Z-INDEX TINGGI */
+      position: absolute !important;
     }
 
+    /* DROPDOWN POSITIONING */
     .navbar-nav .dropdown {
-      position: static;
+      position: relative;
     }
 
     @media (min-width: 992px) {
       .navbar-nav .dropdown {
         position: relative;
       }
+      
+      .dropdown-menu {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        z-index: 99999 !important;
+        transform: translateY(10px) !important;
+      }
     }
 
+    /* DROPDOWN ITEMS */
     .dropdown-item {
-      border-radius: 10px;
-      padding: 0.8rem 1.2rem;
-      transition: all 0.3s ease;
-      color: var(--text-primary);
-      font-weight: 500;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.3rem;
-      z-index: 9999;
+      border-radius: 10px !important;
+      padding: 0.8rem 1.2rem !important;
+      transition: all 0.3s ease !important;
+      color: var(--text-primary) !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      display: flex !important;
+      align-items: center !important;
+      margin-bottom: 0.3rem !important;
+      position: relative !important;
+      z-index: 100000 !important; /* PASTIKAN ITEM DROPDOWN TERLIHAT */
     }
 
     .dropdown-item:hover {
-      background: linear-gradient(135deg, var(--accent-color), #764BA2);
-      color: white;
-      transform: translateX(8px) scale(1.02);
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+      background: linear-gradient(135deg, var(--accent-color), #764BA2) !important;
+      color: white !important;
+      transform: translateX(8px) scale(1.02) !important;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2) !important;
     }
 
     .dropdown-item:focus {
-      background: linear-gradient(135deg, var(--accent-color), #764BA2);
-      color: white;
+      background: linear-gradient(135deg, var(--accent-color), #764BA2) !important;
+      color: white !important;
     }
 
     .dropdown-item i {
       width: 20px;
       margin-right: 0.8rem;
       font-size: 1.1rem;
+    }
+
+    /* BOOTSTRAP OVERRIDE UNTUK DROPDOWN */
+    .navbar-nav .dropdown-menu.show {
+      z-index: 99999 !important;
+      display: block !important;
+    }
+
+    .navbar-collapse {
+      z-index: 9998;
+    }
+
+    /* MOBILE DROPDOWN */
+    @media (max-width: 991.98px) {
+      .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        width: auto !important;
+        margin-top: 0.5rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid rgba(102, 126, 234, 0.3) !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2) !important;
+        z-index: 99999 !important;
+        transform: none !important;
+      }
     }
 
     .navbar-text {
@@ -587,4 +625,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<main></main></main>
+<main>

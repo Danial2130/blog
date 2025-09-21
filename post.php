@@ -25,20 +25,44 @@ if ($post) {
 ?>
 
 <style>
+/* PERBAIKAN UTAMA - Layout Structure */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+/* Blog container HARUS flex: 1 dan JANGAN ada min-height */
 .blog-container {
     background: #f8f9fa;
-    min-height: 100vh;
+    flex: 1; /* INI YANG PALING PENTING */
     padding: 2rem 0;
+    /* HILANGKAN min-height: 100vh - ini yang menyebabkan masalah */
 }
 
 .post-wrapper {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
     background: white;
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     overflow: hidden;
     animation: fadeInUp 0.8s ease;
+}
+
+.post-wrapper:last-child {
+  margin-bottom: 0;
+}
+
+/* Pastikan footer tidak ada konflik */
+.footer-simple {
+  margin-top: 0 !important;
+  background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+  color: white;
+  padding: 3rem 0 1.5rem;
+  position: relative;
 }
 
 .post-hero {
@@ -334,12 +358,12 @@ if ($post) {
 
 @media (max-width: 768px) {
     .blog-container {
-        padding: 1rem;
+        padding: 1rem 0;
     }
     
     .post-wrapper {
         border-radius: 15px;
-        margin: 0 1rem;
+        margin: 0 1rem 1rem 1rem;
     }
     
     .post-content {
