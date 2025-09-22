@@ -1,12 +1,3 @@
-<?php
-session_start();
-$is_admin = (isset($_SESSION['username']) && $_SESSION['username'] === 'admin');
-
-// Deteksi apakah sedang di halaman about
-$current_path = $_SERVER['REQUEST_URI'];
-$is_about_page = (strpos($current_path, '/about/') !== false);
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -60,114 +51,14 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       padding-top: 2rem;
     }
 
-    /* Modern Slide Transition Overlay */
-    .slide-overlay {
-      position: fixed;
-      top: 100vh;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(135deg, #667EEA 0%, #764BA2 50%, #F093FB 100%);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .slide-overlay.active {
-      top: 0;
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .slide-overlay::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-      animation: pulseGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.7; }
-    }
-
-    .slide-content {
-      text-align: center;
-      color: white;
-      z-index: 10001;
-      transform: translateY(50px);
-      opacity: 0;
-      transition: all 0.5s ease 0.3s;
-    }
-
-    .slide-overlay.active .slide-content {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .slide-icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
-
-    .slide-text {
-      font-size: 1.4rem;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    /* Particle Effect */
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .particle {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: floatParticle 3s linear infinite;
-    }
-
-    @keyframes floatParticle {
-      0% {
-        transform: translateY(100vh) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) translateX(50px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* Navbar Styling - Z-INDEX DIPERBAIKI */
+    /* Navbar Styling */
     .navbar {
       background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%) !important;
       backdrop-filter: blur(10px);
       box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 1rem 0;
-      z-index: 9999 !important; /* NAIKKAN Z-INDEX */
+      z-index: 9999 !important;
       position: relative;
     }
 
@@ -229,50 +120,6 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       width: 80%;
     }
 
-    /* Special Back Button Styling */
-    .back-btn {
-      background: linear-gradient(135deg, #FF6B6B, #FF8E8E) !important;
-      border: none;
-      color: white !important;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
-      position: relative;
-      overflow: hidden;
-      padding: 0.8rem 1.5rem !important;
-      border-radius: 25px !important;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .back-btn:hover {
-      background: linear-gradient(135deg, #FF8E8E, #FF6B6B) !important;
-      transform: translateY(-3px) scale(1.08);
-      box-shadow: 0 12px 35px rgba(255, 107, 107, 0.6);
-      color: white !important;
-    }
-
-    .back-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.6s ease;
-      transform: translateY(-50%);
-    }
-
-    .back-btn:hover::before {
-      left: 100%;
-    }
-
-    .back-btn i {
-      margin-right: 8px;
-      font-size: 1.2rem;
-    }
-
     /* Enhanced About Link */
     .about-link {
       position: relative;
@@ -294,7 +141,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       left: 100%;
     }
 
-    /* DROPDOWN MENU - Z-INDEX DIPERBAIKI */
+    /* DROPDOWN MENU FIX */
     .dropdown-menu {
       background: rgba(255, 255, 255, 0.98) !important;
       backdrop-filter: blur(15px);
@@ -303,7 +150,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15) !important;
       padding: 0.8rem;
       min-width: 200px;
-      z-index: 99999 !important; /* NAIKKAN Z-INDEX TINGGI */
+      z-index: 10000 !important;
       position: absolute !important;
     }
 
@@ -321,7 +168,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
         position: absolute !important;
         top: 100% !important;
         left: 0 !important;
-        z-index: 99999 !important;
+        z-index: 10000 !important;
         transform: translateY(10px) !important;
       }
     }
@@ -338,7 +185,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       align-items: center !important;
       margin-bottom: 0.3rem !important;
       position: relative !important;
-      z-index: 100000 !important; /* PASTIKAN ITEM DROPDOWN TERLIHAT */
+      z-index: 10001 !important;
     }
 
     .dropdown-item:hover {
@@ -346,11 +193,6 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
       color: white !important;
       transform: translateX(8px) scale(1.02) !important;
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2) !important;
-    }
-
-    .dropdown-item:focus {
-      background: linear-gradient(135deg, var(--accent-color), #764BA2) !important;
-      color: white !important;
     }
 
     .dropdown-item i {
@@ -361,7 +203,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
 
     /* BOOTSTRAP OVERRIDE UNTUK DROPDOWN */
     .navbar-nav .dropdown-menu.show {
-      z-index: 99999 !important;
+      z-index: 10000 !important;
       display: block !important;
     }
 
@@ -379,7 +221,7 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
         background: rgba(255, 255, 255, 0.95) !important;
         border: 1px solid rgba(102, 126, 234, 0.3) !important;
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2) !important;
-        z-index: 99999 !important;
+        z-index: 10000 !important;
         transform: none !important;
       }
     }
@@ -445,14 +287,6 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
         margin: 0 auto;
         display: block;
       }
-
-      .slide-text {
-        font-size: 1.4rem;
-      }
-
-      .slide-icon {
-        font-size: 3rem;
-      }
     }
 
     /* Loading animation untuk transisi halus */
@@ -482,69 +316,45 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
   </style>
 </head>
 <body>
-<!-- Modern Slide Transition Overlay -->
-<div class="slide-overlay" id="slideOverlay">
-  <div class="particles" id="particles"></div>
-  <div class="slide-content">
-    <div class="slide-icon">
-      <i class="fas fa-spinner fa-spin"></i>
-    </div>
-    <div class="slide-text">Loading...</div>
-  </div>
-</div>
-
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="<?php echo $is_about_page ? '../index.php' : 'index.php'; ?>">BlogD</a>
+    <a class="navbar-brand" href="index.php">BlogD</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="nav" class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto">
-        <?php if ($is_about_page): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="index.php">
+            <i class="fas fa-home me-1"></i>Beranda
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-folder me-1"></i>Kategori
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="index.php?category=Ide"><i class="fas fa-lightbulb me-2"></i>Ide</a></li>
+            <li><a class="dropdown-item" href="index.php?category=Bertanya-tanya"><i class="fas fa-question-circle me-2"></i>Bertanya-tanya</a></li>
+            <li><a class="dropdown-item" href="index.php?category=Random"><i class="fas fa-dice me-2"></i>Random</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link about-link" href="about/index.php" id="aboutLink">
+            <i class="fas fa-info-circle me-1"></i>Tentang
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.php">
+            <i class="fas fa-envelope me-1"></i>Kontak
+          </a>
+        </li>
+        <?php if ($is_admin): ?>
           <li class="nav-item">
-            <a class="nav-link back-btn" href="../index.php" id="backToMain">
-              <i class="fas fa-arrow-left me-1"></i>Kembali ke Blog Utama
+            <a class="nav-link" href="manage.php">
+              <i class="fas fa-cog me-1"></i>Konten
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.php">
-              <i class="fas fa-info-circle me-1"></i>About Home
-            </a>
-          </li>
-        <?php else: ?>
-          <li class="nav-item">
-            <a class="nav-link" href="index.php">
-              <i class="fas fa-home me-1"></i>Beranda
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-folder me-1"></i>Kategori
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="index.php?category=Ide"><i class="fas fa-lightbulb me-2"></i>Ide</a></li>
-              <li><a class="dropdown-item" href="index.php?category=Bertanya-tanya"><i class="fas fa-question-circle me-2"></i>Bertanya-tanya</a></li>
-              <li><a class="dropdown-item" href="index.php?category=Random"><i class="fas fa-dice me-2"></i>Random</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link about-link" href="about/index.php" id="aboutLink">
-              <i class="fas fa-info-circle me-1"></i>Tentang
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.php">
-              <i class="fas fa-envelope me-1"></i>Kontak
-            </a>
-          </li>
-          <?php if ($is_admin): ?>
-            <li class="nav-item">
-              <a class="nav-link" href="manage.php">
-                <i class="fas fa-cog me-1"></i>Konten
-              </a>
-            </li>
-          <?php endif; ?>
         <?php endif; ?>
       </ul>
       <ul class="navbar-nav">
@@ -576,52 +386,33 @@ $is_about_page = (strpos($current_path, '/about/') !== false);
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const aboutLink = document.getElementById('aboutLink');
-  const slideOverlay = document.getElementById('slideOverlay');
-  const particlesContainer = document.getElementById('particles');
+  // Perbaikan dropdown kategori
+  const categoryDropdown = document.querySelector('.dropdown');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
   
-  // Create floating particles
-  function createParticles() {
-    for (let i = 0; i < 50; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.width = Math.random() * 4 + 2 + 'px';
-      particle.style.height = particle.style.width;
-      particle.style.animationDelay = Math.random() * 3 + 's';
-      particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-      particlesContainer.appendChild(particle);
-    }
-  }
-  
-  if (aboutLink && slideOverlay) {
-    aboutLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      // Create particles
-      createParticles();
-      
-      // Activate smooth slide transition
-      slideOverlay.classList.add('active');
-      
-      // Navigate after animation
-      setTimeout(function() {
-        window.location.href = aboutLink.href;
-      }, 1200); // 1.2 seconds for smoother experience
-    });
-  }
-  
-  // Add some interactive effects to nav links
-  const navLinks = document.querySelectorAll('.nav-link:not(.back-btn)');
-  navLinks.forEach(link => {
-    link.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-2px) scale(1.02)';
+  if (categoryDropdown && dropdownMenu) {
+    categoryDropdown.addEventListener('mouseover', function() {
+      dropdownMenu.classList.add('show');
     });
     
-    link.addEventListener('mouseleave', function() {
-      this.style.transform = 'translateY(0) scale(1)';
+    categoryDropdown.addEventListener('mouseout', function() {
+      setTimeout(() => {
+        if (!dropdownMenu.matches(':hover')) {
+          dropdownMenu.classList.remove('show');
+        }
+      }, 150);
     });
-  });
+    
+    dropdownMenu.addEventListener('mouseover', function() {
+      clearTimeout(categoryDropdown._hideTimeout);
+    });
+    
+    dropdownMenu.addEventListener('mouseout', function() {
+      categoryDropdown._hideTimeout = setTimeout(() => {
+        dropdownMenu.classList.remove('show');
+      }, 150);
+    });
+  }
 });
 </script>
 
